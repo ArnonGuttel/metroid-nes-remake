@@ -10,8 +10,9 @@ public class Enemy2Script : MonoBehaviour
     
     public SpriteRenderer sp;
     public GameObject enemyBullet;
-    [SerializeField]  private float speed = 1;
-    [SerializeField] private float platformGround = -2.5f;
+    public float platformGround = -2.5f;
+    [SerializeField] private int hitsTillDestroy;
+    [SerializeField]  private float speed = 1; 
     [SerializeField] private float delay = 1.5f;
     [SerializeField] private float bulletSpeed = 1.5f;
     [SerializeField] private Vector2[] bulletDirections;
@@ -19,37 +20,27 @@ public class Enemy2Script : MonoBehaviour
     #endregion
 
     #region Fields
-
-    private Vector3 playerPosition;
-    private Vector2 EnemyTarget;
-    private bool attackPlayer;
+    
+    [HideInInspector] public Vector3 playerPosition;
+    [HideInInspector] public bool attackPlayer;
+    private Vector2 playerTarget;
     private bool explode;
     private float timer;
+    private int hitsCounter;
 
     #endregion
-    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {       
-            playerPosition = other.gameObject.transform.position;
-            EnemyTarget = new Vector2(playerPosition.x,platformGround);
-            attackPlayer = true;
-            sp.color = Color.cyan;}
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {        
-            playerPosition = other.gameObject.transform.position;
-            EnemyTarget = new Vector2(playerPosition.x,platformGround);
-            CircleCollider2D circle = GetComponent<CircleCollider2D>();
-            circle.radius -= 0.1f;
+        if (other.CompareTag("Bullet"))
+        {
+            hitsCounter++;
+            if (hitsCounter == hitsTillDestroy)
+                Destroy(gameObject);
+            sp.color = Color.red;
         }
     }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -63,9 +54,11 @@ public class Enemy2Script : MonoBehaviour
     {
         if (attackPlayer)
         {
-            transform.position = Vector2.MoveTowards(transform.position, EnemyTarget,
+            sp.color = Color.cyan;
+            playerTarget = new Vector2(playerPosition.x, platformGround-1f);
+            transform.position = Vector2.MoveTowards(transform.position, playerTarget,
                 Time.deltaTime * speed); // chase player until the enemy is on the ground
-            if (transform.position.y == platformGround)
+            if (transform.position.y <= platformGround)
             {
                 Destroy(GetComponent(typeof(CircleCollider2D)));
                 attackPlayer = false;
