@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy2Script : MonoBehaviour
 {
@@ -10,13 +11,15 @@ public class Enemy2Script : MonoBehaviour
     
     public SpriteRenderer sp;
     public GameObject enemyBullet;
-    public float platformGround = -2.5f;
+    public GameObject EnregyBall;
     [SerializeField] private int hitsTillDestroy;
     [SerializeField]  private float speed = 1; 
     [SerializeField] private float delay = 1.5f;
     [SerializeField] private float bulletSpeed = 1.5f;
     [SerializeField] private Vector2[] bulletDirections;
-
+    [SerializeField] private float dropRate;
+    [SerializeField] private float hitDelay;
+    
     #endregion
 
     #region Fields
@@ -27,6 +30,7 @@ public class Enemy2Script : MonoBehaviour
     private bool explode;
     private float timer;
     private int hitsCounter;
+    private float delayCounter;
 
     #endregion
 
@@ -36,35 +40,48 @@ public class Enemy2Script : MonoBehaviour
         {
             hitsCounter++;
             if (hitsCounter == hitsTillDestroy)
+            {
+                if (Random.Range(0f, 1f) <= dropRate)
+                {
+                    Instantiate(EnregyBall, transform);
+                }
                 Destroy(gameObject);
+            }
             sp.color = Color.red;
+            delayCounter = hitDelay;
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("You got hit!");
             sp.color = Color.yellow;
+        }
+
+        if (other.gameObject.CompareTag("Platform"))
+        {
+            attackPlayer = false;
+            explode = true;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            sp.color = Color.blue;
         }
     }
 
     private void Update()
     {
+        if (delayCounter > 0)
+        {
+            delayCounter -= Time.deltaTime;
+            return;
+        }
+        
         if (attackPlayer)
         {
             sp.color = Color.cyan;
-            playerTarget = new Vector2(playerPosition.x, platformGround-1f);
+            playerTarget = new Vector2(playerPosition.x, transform.position.y-5f);
             transform.position = Vector2.MoveTowards(transform.position, playerTarget,
                 Time.deltaTime * speed); // chase player until the enemy is on the ground
-            if (transform.position.y <= platformGround)
-            {
-                Destroy(GetComponent(typeof(CircleCollider2D)));
-                attackPlayer = false;
-                explode = true;
-                sp.color = Color.red;
-            }
         }
         if (explode)
         {

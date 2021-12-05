@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4412222914110248460}
   - component: {fileID: 4412222914110248461}
-  - component: {fileID: 8646273520146385241}
   - component: {fileID: 4412222914110248462}
+  - component: {fileID: 8646273520146385241}
+  - component: {fileID: 2990587322600120460}
   m_Layer: 6
   m_Name: Enemy1
   m_TagString: Enemy
@@ -85,22 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8646273520146385241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4412222914110248457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3692e5f2bf1b9a244b6fbdb603946d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sp: {fileID: 4412222914110248461}
-  enemySpeed: 2
-  hitsTillDestroy: 3
-  enemyPositions: []
 --- !u!61 &4412222914110248462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127,3 +112,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &8646273520146385241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412222914110248457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3692e5f2bf1b9a244b6fbdb603946d70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sp: {fileID: 4412222914110248461}
+  EnregyBall: {fileID: 6907323533845595635, guid: ac34e293093685a4fbd43111ea298b14, type: 3}
+  hitDelay: 0.3
+  hitsTillDestroy: 2
+  dropRate: 0.4
+--- !u!114 &2990587322600120460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412222914110248457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f076b1abbdd6b7a4e8b499328f752b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  speed: 1.5
+  delayCounter: 0

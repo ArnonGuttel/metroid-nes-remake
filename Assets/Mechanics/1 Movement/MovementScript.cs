@@ -7,7 +7,7 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
     private bool canJump;
-    
+
     public Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private Vector2 StartPosition;
@@ -17,17 +17,15 @@ public class MovementScript : MonoBehaviour
 // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        if (Input.GetKey(KeyCode.LeftArrow))
-            rb.velocity = new Vector2(-1 * moveSpeed, rb.velocity.y);
+        float dirx = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(dirx * moveSpeed, rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space) && canJump) // long jump
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
         else if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0.0f) // short jump
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - ShortJumpDecrease);
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Platform"))
             canJump = true;
@@ -35,11 +33,9 @@ public class MovementScript : MonoBehaviour
             transform.position = StartPosition;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Platform"))
             canJump = false;
     }
-
-
 }

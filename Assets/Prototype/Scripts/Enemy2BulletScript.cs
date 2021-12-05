@@ -11,7 +11,7 @@ public class Enemy2BulletScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             print("You got hit!");
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

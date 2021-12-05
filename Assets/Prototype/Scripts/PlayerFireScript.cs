@@ -10,12 +10,14 @@ public class PlayerFireScript : MonoBehaviour
     public GameObject ReferencedBullet;
     public GameObject Gun;
 
-    [SerializeField] private float bulletSpeed = 1;
-
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletTimer;
+    
     #endregion
 
     #region Fields
 
+    [HideInInspector] public bool canFire;
     private Vector2 currentDirection = Vector2.right;
     private Quaternion transformRotation;
 
@@ -44,12 +46,14 @@ public class PlayerFireScript : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.S))
-        {
+        {   
+            if (!canFire)
+                return;
             GameObject bullet = Instantiate(ReferencedBullet);
             bullet.transform.position = transform.position;
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             bulletRb.velocity = currentDirection*bulletSpeed;
-            Destroy(bullet,1.5f); // Destroy bullet on timer or on collision
+            Destroy(bullet,bulletTimer); // Destroy bullet on timer or on collision
         }
     }
 }

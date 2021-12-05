@@ -11,7 +11,6 @@ public class Enemy2Radius : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("pinuk");
             script.playerPosition = other.gameObject.transform.position;
             script.attackPlayer = true;
         }

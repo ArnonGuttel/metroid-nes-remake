@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6260443358640080732}
   - component: {fileID: 10444842071399789}
   - component: {fileID: 3758476213480632709}
+  - component: {fileID: 7668648205207367563}
   m_Layer: 6
   m_Name: Enemy2Radius
   m_TagString: Untagged
@@ -61,6 +62,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   script: {fileID: 2395594637203624058}
+--- !u!50 &7668648205207367563
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628621929352305212}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5838080361436079571
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,6 +95,7 @@ GameObject:
   - component: {fileID: 5838080361436079574}
   - component: {fileID: 2395594637203624058}
   - component: {fileID: 5838080361436079569}
+  - component: {fileID: 9097810485852786489}
   m_Layer: 6
   m_Name: Enemy2
   m_TagString: Enemy
@@ -161,16 +184,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sp: {fileID: 5838080361436079574}
   enemyBullet: {fileID: 7323704332384061446, guid: 54f2e7d264269ce4da4f2dfab255f6da, type: 3}
-  platformGround: -4
+  EnregyBall: {fileID: 6907323533845595635, guid: ac34e293093685a4fbd43111ea298b14, type: 3}
   hitsTillDestroy: 3
-  speed: 3.5
-  delay: 1.5
+  speed: 5.5
+  delay: 1
   bulletSpeed: 5
   bulletDirections:
   - {x: 1, y: 0}
   - {x: -1, y: 0}
   - {x: 1, y: 1}
   - {x: -1, y: 1}
+  dropRate: 0.3
+  hitDelay: 0.3
   playerPosition: {x: 0, y: 0, z: 0}
   attackPlayer: 0
 --- !u!61 &5838080361436079569
@@ -183,7 +208,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -199,3 +224,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!50 &9097810485852786489
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838080361436079571}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109472920291829483}
   - component: {fileID: 2109472920291829480}
+  - component: {fileID: 8354009263301223295}
   - component: {fileID: 2135314835633390000}
   - component: {fileID: 3983667875885714855}
   - component: {fileID: 2109472920291829484}
@@ -89,6 +90,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8354009263301223295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109472920291829481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70abe82e0391fc945adea23722129393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyFrame: {fileID: 0}
+  invulnerableLength: 0.5
 --- !u!114 &2135314835633390000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +120,11 @@ MonoBehaviour:
   moveSpeed: 5
   jumpHeight: 16
   ShortJumpDecrease: 7
+  knockBackCount: 0
+  knockFromRight: 0
+  knockBackLength: 0.1
+  knockBack: 3
+  rollPowerUp: 0
 --- !u!114 &3983667875885714855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +140,8 @@ MonoBehaviour:
   ReferencedBullet: {fileID: 1324553799660504739, guid: 951b16459c48577498f7aa15f18d11f9, type: 3}
   Gun: {fileID: 3147772538557627814}
   bulletSpeed: 6
+  bulletTimer: 0.7
+  canFire: 0
 --- !u!50 &2109472920291829484
 Rigidbody2D:
   serializedVersion: 4
