@@ -8,6 +8,7 @@ public class BoundaryManager : MonoBehaviour
     private BoxCollider2D managerBox;
     public Transform Player;
     public GameObject boundary;
+    public bool cameraLock;
 
     private void Start()
     {

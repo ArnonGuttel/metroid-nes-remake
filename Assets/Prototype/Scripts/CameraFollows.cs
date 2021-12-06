@@ -16,6 +16,8 @@ public class CameraFollows : MonoBehaviour
     
     void Update()
     {
+        if (lockX)
+            return;
         followPlayer();
     }
 
@@ -29,7 +31,10 @@ public class CameraFollows : MonoBehaviour
                 Mathf.Clamp(Player.position.x, boundaryCollider.bounds.min.x + cameraBox.size.x/2, boundaryCollider.bounds.max.x - cameraBox.size.x/2),
                 Mathf.Clamp(Player.position.y-1, boundaryCollider.bounds.min.y + cameraBox.size.y/2, boundaryCollider.bounds.max.y - cameraBox.size.y/2),
                 -10);
-
+            if (boundary.gameObject.GetComponentInParent<BoundaryManager>().cameraLock)
+                lockX = true;
+            else
+                lockX = false;
         }
     }
 }
