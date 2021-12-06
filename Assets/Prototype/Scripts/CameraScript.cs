@@ -34,10 +34,11 @@ public class CameraScript : MonoBehaviour
 
     public void MoveCamera(bool goRight)
     {
+        Vector3 newCameraPos = cameraPositions[cameraPositionIndex];
+        transform.position = new Vector3(newCameraPos.x, transform.position.y, transform.position.z);
         if (goRight)
             cameraPositionIndex++;
         else
             cameraPositionIndex--;
-        transform.position = cameraPositions[cameraPositionIndex];
     }
 }

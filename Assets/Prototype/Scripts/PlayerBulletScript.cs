@@ -9,7 +9,7 @@ public class PlayerBulletScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             return;
-        if (other.CompareTag("Platform") || other.CompareTag("Enemy"))
+        if (other.CompareTag("Platform") || other.CompareTag("Enemy") || other.CompareTag("Door"))
         {
             Destroy(gameObject);
         }
