@@ -27,21 +27,27 @@ public class PlayerFireScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool ground = gameObject.GetComponent<PlayerMovement>().onGround;
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Gun.transform.localPosition = new Vector3(0.5f, 0, 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            Gun.transform.localPosition = new Vector3(0.5f, 0.3f, 0);
             currentDirection = Vector2.right;
         }
         
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Gun.transform.localPosition = new Vector3(-0.5f, 0, 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            Gun.transform.localPosition = new Vector3(-0.5f, 0.3f, 0);
             currentDirection = Vector2.left;
         }
         
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Gun.transform.localPosition = new Vector3(0, 0.5f, 0);
+            if (currentDirection == Vector2.right)
+                Gun.transform.localPosition = new Vector3(0.1f, 0.5f, 0);
+            else if (currentDirection == Vector2.left)
+                Gun.transform.localPosition = new Vector3(-0.1f, 0.5f, 0);
             currentDirection = Vector2.up;
         }
 
@@ -50,10 +56,24 @@ public class PlayerFireScript : MonoBehaviour
             if (!canFire)
                 return;
             GameObject bullet = Instantiate(ReferencedBullet);
-            bullet.transform.position = transform.position;
+            bullet.transform.position = Gun.transform.position;
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             bulletRb.velocity = currentDirection*bulletSpeed;
             Destroy(bullet,bulletTimer); // Destroy bullet on timer or on collision
+            gameObject.GetComponent<Animator>().SetTrigger("Fire");
         }
+
+        if (currentDirection == Vector2.up)
+        {
+            gameObject.GetComponent<Animator>().SetBool("IsGunUp", true);
+            
+            gameObject.GetComponent<Animator>().SetBool("IsGunUpJump", !ground);
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().SetBool("IsGunUp", false);
+            gameObject.GetComponent<Animator>().SetBool("IsGunUpJump", false);
+        }
+            
     }
 }

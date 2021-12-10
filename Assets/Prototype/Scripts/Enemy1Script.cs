@@ -29,9 +29,10 @@ public class Enemy1Script : MonoBehaviour
                 {
                     Instantiate(EnregyBall, transform.position, transform.rotation);
                 }
-                Destroy(gameObject);
+                gameObject.GetComponent<Animator>().SetTrigger("EnemyDead");
+                Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             }
-            sp.color = Color.red;
+            gameObject.GetComponent<Animator>().SetTrigger("EnemyHit");
             GetComponent<WaypointFollower>().delayCounter = hitDelay;
         }
     }

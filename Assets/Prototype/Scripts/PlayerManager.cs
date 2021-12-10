@@ -31,11 +31,7 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
     
-    #region Events
-    
-    public static event Action playerDead;
 
-    #endregion
 
     #region MonoBehaviour
     
@@ -72,7 +68,6 @@ public class PlayerManager : MonoBehaviour
         }
         if (invulnerableCounter <= 0)
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
                 
@@ -83,11 +78,14 @@ public class PlayerManager : MonoBehaviour
 
     private void enemyHit(GameObject other)
     {
+        gameObject.GetComponent<Animator>().SetTrigger("PlayerHit");
         _playerEnergy -= HitDamage;
         if (_playerEnergy <= 0)
         {
             _playerEnergy = 0;
-            playerDead?.Invoke();
+            gameObject.GetComponent<Animator>().SetTrigger("PlayerDead");
+            // Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            
         }
         energyFrame.text = _playerEnergy.ToString();
         
@@ -99,7 +97,6 @@ public class PlayerManager : MonoBehaviour
         player.knockBackCount = player.knockBackLength;
         
         invulnerableCounter = invulnerableLength;
-        GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
     public void addEnergy()

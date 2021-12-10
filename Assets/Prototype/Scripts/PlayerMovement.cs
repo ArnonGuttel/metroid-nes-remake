@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public Animator Animator;
     private BoxCollider2D playerFeetCollision2D;
 
     [SerializeField] private float moveSpeed = 1f;
@@ -14,11 +15,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ShortJumpDecrease = 5.0f;
     [HideInInspector] public float knockBackCount;
     [HideInInspector] public bool knockFromRight;
-    private bool ground;
+    [HideInInspector] public bool onGround;
     public float knockBackLength;
     public float knockBack;
     public bool rollPowerUp;
-    private bool rolling;
+    private bool _isRolling;
 
     void Update()
     {
@@ -27,17 +28,17 @@ public class PlayerMovement : MonoBehaviour
             float dirx = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(dirx * moveSpeed, rb.velocity.y);
             if (Input.GetKey(KeyCode.UpArrow))
-                rolling = false;
-            if (Input.GetKeyDown(KeyCode.Space) && ground) // long jump
+                _isRolling = false;
+            if (Input.GetKeyDown(KeyCode.Space) && onGround) // long jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
-                rolling = false;
+                _isRolling = false;
             }
             else if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0.0f) // short jump
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - ShortJumpDecrease);
 
-            if (Input.GetKey(KeyCode.DownArrow) && rollPowerUp && ground)
-                changeSize();
+            if (Input.GetKey(KeyCode.DownArrow) && rollPowerUp && onGround)
+                startRoll();
         }
 
         else
@@ -49,33 +50,40 @@ public class PlayerMovement : MonoBehaviour
             knockBackCount -= Time.deltaTime;
         }
 
-        if (!rolling)
+        if (!_isRolling)
         {
             transform.localScale = new Vector3(1,1,1);
             gameObject.GetComponent<PlayerFireScript>().canFire = true;
+            Animator.SetBool("IsRolling",false);
         }
+        
+        if (onGround && rb.velocity.magnitude >= 0.001f)
+            Animator.SetBool("IsWalking", true);
+        else
+            Animator.SetBool("IsWalking", false);
+        
+        Animator.SetBool("IsJumping",  !onGround);
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Platform"))
-            ground = true;
+            onGround = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Platform"))
-            ground = false;
+            onGround = false;
     }
     
-    private void changeSize()
+    private void startRoll()
     {
-        if (!rolling)
+        if (!_isRolling)
         {
-            Vector3 scale = transform.localScale;
-            transform.localScale = new Vector3(scale.x / 2, scale.y / 2, scale.z);
-            rolling = true;
+            _isRolling = true;
             gameObject.GetComponent<PlayerFireScript>().canFire = false;
+            Animator.SetBool("IsRolling",true);
         }
     }
 }

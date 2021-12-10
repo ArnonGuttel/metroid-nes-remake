@@ -13,6 +13,7 @@ public class Enemy2Radius : MonoBehaviour
         {
             script.playerPosition = other.gameObject.transform.position;
             script.attackPlayer = true;
+            gameObject.GetComponentInParent<Animator>().SetTrigger("EnemyActivate");
         }
     }
 

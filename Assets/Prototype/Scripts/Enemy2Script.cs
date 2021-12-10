@@ -43,29 +43,25 @@ public class Enemy2Script : MonoBehaviour
             {
                 if (Random.Range(0f, 1f) <= dropRate)
                 {
-                    Instantiate(EnregyBall, transform);
+                    Instantiate(EnregyBall, transform.position, transform.rotation);
                 }
-                Destroy(gameObject);
+                gameObject.GetComponent<Animator>().SetTrigger("EnemyDead");
+                Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             }
-            sp.color = Color.red;
+            gameObject.GetComponent<Animator>().SetTrigger("EnemyHit");
             delayCounter = hitDelay;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            sp.color = Color.yellow;
-        }
 
-        if (other.gameObject.CompareTag("Platform"))
+        if (other.gameObject.CompareTag("Platform")&& attackPlayer)
         {
             attackPlayer = false;
             Destroy(gameObject.GetComponentInChildren<CircleCollider2D>());
             explode = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            sp.color = Color.blue;
         }
     }
 
@@ -79,7 +75,6 @@ public class Enemy2Script : MonoBehaviour
         
         if (attackPlayer)
         {
-            sp.color = Color.cyan;
             playerTarget = new Vector2(playerPosition.x, transform.position.y-5f);
             transform.position = Vector2.MoveTowards(transform.position, playerTarget,
                 Time.deltaTime * speed); // chase player until the enemy is on the ground
