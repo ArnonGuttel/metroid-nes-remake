@@ -16,25 +16,31 @@ public class CameraFollows : MonoBehaviour
     
     void Update()
     {
-        if (lockX)
-            return;
-        followPlayer();
+        GameObject boundary = GameObject.Find("Boundary");
+        Vector3 prevPosition = transform.position;
+        followPlayer(boundary);
+        Vector3 temp = transform.position;
+        if (boundary.gameObject.GetComponentInParent<BoundaryManager>().cameraLockX)
+        {
+            temp.x = prevPosition.x;
+        }
+        if (boundary.gameObject.GetComponentInParent<BoundaryManager>().cameraLockY)
+        {
+            temp.y = prevPosition.y;
+        }
+
+        transform.position = temp;
     }
 
-    private void followPlayer()
+    private void followPlayer(GameObject boundary)
     {
-        GameObject boundary = GameObject.Find("Boundary");
         if (boundary)
         {
             BoxCollider2D boundaryCollider = boundary.GetComponent<BoxCollider2D>();
             transform.position = new Vector3(
                 Mathf.Clamp(Player.position.x, boundaryCollider.bounds.min.x + cameraBox.size.x/2, boundaryCollider.bounds.max.x - cameraBox.size.x/2),
-                Mathf.Clamp(Player.position.y-1, boundaryCollider.bounds.min.y + cameraBox.size.y/2, boundaryCollider.bounds.max.y - cameraBox.size.y/2),
+                Mathf.Clamp(Player.position.y-2, boundaryCollider.bounds.min.y + cameraBox.size.y/2, boundaryCollider.bounds.max.y - cameraBox.size.y/2),
                 -10);
-            if (boundary.gameObject.GetComponentInParent<BoundaryManager>().cameraLock)
-                lockX = true;
-            else
-                lockX = false;
         }
     }
 }

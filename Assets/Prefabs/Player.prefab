@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyFrame: {fileID: 0}
-  invulnerableLength: 0.5
+  invulnerableLength: 1
 --- !u!114 &2135314835633390000
 MonoBehaviour:
   m_ObjectHideFlags: 0

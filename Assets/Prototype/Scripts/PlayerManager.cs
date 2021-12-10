@@ -68,9 +68,14 @@ public class PlayerManager : MonoBehaviour
         if (invulnerableCounter > 0)
         {
             invulnerableCounter -= Time.deltaTime;
-            if (invulnerableCounter <= 0)
-                GetComponent<SpriteRenderer>().color = Color.red;
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
+        if (invulnerableCounter <= 0)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+            gameObject.layer = LayerMask.NameToLayer("Player");
+        }
+                
     }
     #endregion
     

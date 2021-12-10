@@ -62,6 +62,7 @@ public class Enemy2Script : MonoBehaviour
         if (other.gameObject.CompareTag("Platform"))
         {
             attackPlayer = false;
+            Destroy(gameObject.GetComponentInChildren<CircleCollider2D>());
             explode = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             sp.color = Color.blue;
