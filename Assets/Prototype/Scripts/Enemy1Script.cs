@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Enemy1Script : MonoBehaviour
 {
-    public SpriteRenderer sp;
     public GameObject EnregyBall;
 
     [SerializeField] private float hitDelay;
@@ -17,6 +16,34 @@ public class Enemy1Script : MonoBehaviour
     private float delayCounter;
     private int hitCounter;
     private int index;
+    private Vector3 _originalPosition;
+
+    //
+    // private void OnBecameVisible()
+    // {
+    //     gameObject.SetActive(true);
+    //     print("pinuk");
+    //     resetEnemy();
+    // }
+    //
+    // private void OnBecameInvisible()
+    // {
+    //     print("notPinuk");
+    // }
+    //
+    // private void Start()
+    // {
+    //     _originalPosition= transform.position;
+    // }
+    //
+    // private void resetEnemy()
+    // {
+    //     transform.position = _originalPosition;
+    //     delayCounter = 0;
+    //     hitCounter = 0;
+    //     index = 0;
+    // }
+    
     
     private void OnTriggerEnter2D(Collider2D other)
     {

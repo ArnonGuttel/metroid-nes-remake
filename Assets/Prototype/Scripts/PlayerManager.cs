@@ -17,15 +17,18 @@ public class PlayerManager : MonoBehaviour
     
     #region Inspector
 
-    public TextMeshProUGUI energyFrame;
-    
+    [SerializeField] private  TextMeshProUGUI energyFrame;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject gameWonUI;
+    [SerializeField] float invulnerableLength;
+
     #endregion
 
     #region Fields
-    
+
+    [HideInInspector] public bool GameWon;
     private bool _canRoll;
     private int _playerEnergy = InitialEnergy;
-    [SerializeField] float invulnerableLength;
     private float invulnerableCounter; 
 
 
@@ -70,6 +73,12 @@ public class PlayerManager : MonoBehaviour
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
+
+        if (GameWon)
+        {
+            GetComponent<PlayerMovement>().PlayerDead = true;
+            gameWonUI.gameObject.SetActive(true);
+        }
                 
     }
     #endregion
@@ -84,7 +93,8 @@ public class PlayerManager : MonoBehaviour
         {
             _playerEnergy = 0;
             gameObject.GetComponent<Animator>().SetTrigger("PlayerDead");
-            // Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            GetComponent<PlayerMovement>().PlayerDead = true;
+            gameOverUI.SetActive(true);
             
         }
         energyFrame.text = _playerEnergy.ToString();

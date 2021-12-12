@@ -8,9 +8,19 @@ public class BoundaryManager : MonoBehaviour
     private BoxCollider2D managerBox;
     public Transform Player;
     public GameObject boundary;
-    public bool cameraLockX;
-    public bool cameraLockY;
 
+    public bool XMaxEnabled;
+    public float XMaxValue;
+
+    public bool XMinEnabled;
+    public float XMinValue;
+    
+    public bool YMaxEnabled;
+    public float YMaxValue;
+
+    public bool YMinEnabled;
+    public float YMinValue;
+    
     private void Start()
     {
         managerBox = GetComponent<BoxCollider2D>();

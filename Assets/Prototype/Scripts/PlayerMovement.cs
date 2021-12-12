@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float knockBackCount;
     [HideInInspector] public bool knockFromRight;
     [HideInInspector] public bool onGround;
+    [HideInInspector] public bool PlayerDead;
     public float knockBackLength;
     public float knockBack;
     public bool rollPowerUp;
@@ -23,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (PlayerDead)
+            return;
+        
         if (knockBackCount <= 0)
         {
             float dirx = Input.GetAxisRaw("Horizontal");
