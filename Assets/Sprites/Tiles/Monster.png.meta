@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f44423fe9fbd11e469f7ee073e86e968
+guid: 7223fd39dd504d14184b56781d15c3ef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703208544075230211
-    second: Blue Dust
+      213: -7482177786666212508
+    second: Monster
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -94,13 +94,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Dust
+      name: Monster
       rect:
         serializedVersion: 2
         x: 1
-        y: 1
-        width: 16
-        height: 16
+        y: 0
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -108,8 +108,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30cafbb2f0208c870800000000000000
-      internalID: 8703208544075230211
+      spriteID: 463217ff1f6f92890800000000000000
+      internalID: -7482177786666212508
       vertices: []
       indices: 
       edges: []

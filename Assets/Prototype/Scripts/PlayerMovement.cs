@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
                 _isRolling = false;
             }
             else if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0.0f) // short jump
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - ShortJumpDecrease);
+                rb.velocity = new Vector2(rb.velocity.x,math.max(rb.velocity.y - ShortJumpDecrease,0));
 
             if (Input.GetKey(KeyCode.DownArrow) && rollPowerUp && onGround)
                 startRoll();

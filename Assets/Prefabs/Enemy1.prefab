@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3692e5f2bf1b9a244b6fbdb603946d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sp: {fileID: 4412222914110248461}
   EnregyBall: {fileID: 6907323533845595635, guid: ac34e293093685a4fbd43111ea298b14, type: 3}
   hitDelay: 0.3
   hitsTillDestroy: 2

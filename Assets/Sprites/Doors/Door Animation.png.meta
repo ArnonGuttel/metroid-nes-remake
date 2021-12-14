@@ -1,25 +1,16 @@
 fileFormatVersion: 2
-guid: d7b876de06644694480d58039d2180ec
+guid: cf96bbeab0e962b4798a58d9771b96a3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7207937419354456476
-    second: Small Tiles_0
+      213: -1197216642424367190
+    second: Door Animation1
   - first:
-      213: -1697685861442796262
-    second: Small Tiles_1
+      213: -2441567543607924418
+    second: Door Animation2
   - first:
-      213: -7057662987573433536
-    second: Small Tiles_2
-  - first:
-      213: 8859806239017582178
-    second: Small Tiles_3
-  - first:
-      213: -6375401273946499663
-    second: Small Tiles_4
-  - first:
-      213: -2474739644850253879
-    second: Small Tiles_5
+      213: -4546597959010066560
+    second: Door Animation3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,7 +55,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 75
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,118 +100,55 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Small Tiles_0
+      name: Door Animation1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 38
-        width: 35
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 46eb12c3b1348fb90800000000000000
-      internalID: -7207937419354456476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Small Tiles_1
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 38
-        width: 35
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a15cf7824bb9078e0800000000000000
-      internalID: -1697685861442796262
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Small Tiles_2
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 38
-        width: 35
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 04b6349e7e42e0e90800000000000000
-      internalID: -7057662987573433536
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Small Tiles_3
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 1
         y: 1
-        width: 35
-        height: 37
+        width: 8
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26ebe6745da54fa70800000000000000
-      internalID: 8859806239017582178
+      spriteID: aa71c1d8ec1a26fe0800000000000000
+      internalID: -1197216642424367190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small Tiles_4
+      name: Door Animation2
       rect:
         serializedVersion: 2
-        x: 35
+        x: 10
         y: 1
-        width: 35
-        height: 37
+        width: 8
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b598d5d1560687a0800000000000000
-      internalID: -6375401273946499663
+      spriteID: e39602c414fcd1ed0800000000000000
+      internalID: -2441567543607924418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Small Tiles_5
+      name: Door Animation3
       rect:
         serializedVersion: 2
-        x: 70
+        x: 19
         y: 1
-        width: 35
-        height: 37
+        width: 8
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,8 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cfcf1d9765f7add0800000000000000
-      internalID: -2474739644850253879
+      spriteID: 08f50b4ce3d37e0c0800000000000000
+      internalID: -4546597959010066560
       vertices: []
       indices: 
       edges: []

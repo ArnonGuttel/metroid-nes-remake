@@ -9,7 +9,7 @@ public class DoorScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            GetComponent<Animator>().SetTrigger("OpenDoor");
         }
         
     }

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: f44423fe9fbd11e469f7ee073e86e968
+guid: cf51ae8bcee28e84fb93be593e9f6c22
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703208544075230211
-    second: Blue Dust
+      213: -5835643585220719066
+    second: Blue Pipe
+  - first:
+      213: -5779910763301523596
+    second: Blue Pipe_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -94,10 +97,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Dust
+      name: Blue Pipe
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 1
         width: 16
         height: 16
@@ -108,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30cafbb2f0208c870800000000000000
-      internalID: 8703208544075230211
+      spriteID: 62ec12be311a30fa0800000000000000
+      internalID: -5835643585220719066
       vertices: []
       indices: 
       edges: []

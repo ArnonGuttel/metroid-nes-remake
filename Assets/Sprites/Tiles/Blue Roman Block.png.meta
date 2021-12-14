@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f44423fe9fbd11e469f7ee073e86e968
+guid: 55e2232cd36a8b349ba11ef2f0e0d788
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703208544075230211
-    second: Blue Dust
+      213: -5666624691485344773
+    second: Blue Roman Block
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -94,11 +94,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Dust
+      name: Blue Roman Block
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
+        x: 0
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -108,8 +108,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30cafbb2f0208c870800000000000000
-      internalID: 8703208544075230211
+      spriteID: bfbfe8cbdda1c51b0800000000000000
+      internalID: -5666624691485344773
       vertices: []
       indices: 
       edges: []

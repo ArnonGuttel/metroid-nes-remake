@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f44423fe9fbd11e469f7ee073e86e968
+guid: 3c55e71a884984247bdc8ae30b355cdc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703208544075230211
-    second: Blue Dust
+      213: -3453655208228064252
+    second: PlayerBullet2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -94,22 +94,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Dust
+      name: PlayerBullet2
       rect:
         serializedVersion: 2
         x: 1
         y: 1
-        width: 16
-        height: 16
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30cafbb2f0208c870800000000000000
-      internalID: 8703208544075230211
+      spriteID: 40473e8e2e62210d0800000000000000
+      internalID: -3453655208228064252
       vertices: []
       indices: 
       edges: []

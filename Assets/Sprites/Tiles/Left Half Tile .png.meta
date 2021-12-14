@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f44423fe9fbd11e469f7ee073e86e968
+guid: a40340e9046acde4aa1b546c675e95fa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703208544075230211
-    second: Blue Dust
+      213: 4127753483986942280
+    second: Left Half Tile
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -94,10 +94,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Dust
+      name: Left Half Tile
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 1
         width: 16
         height: 16
@@ -108,8 +108,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30cafbb2f0208c870800000000000000
-      internalID: 8703208544075230211
+      spriteID: 8493c658ce9b84930800000000000000
+      internalID: 4127753483986942280
       vertices: []
       indices: 
       edges: []

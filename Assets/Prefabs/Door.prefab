@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7788121548635892838}
   - component: {fileID: 4070559184926248465}
   - component: {fileID: 2082527334139540700}
+  - component: {fileID: 8239575295536354218}
   m_Layer: 0
   m_Name: Door Triger Right
   m_TagString: Door
@@ -61,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 6123297253755013572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 14.738, y: 1.1661518, z: 174.92789}
-  m_LocalScale: {x: 1.918317, y: 1.9124788, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4679493154668079887}
   m_RootOrder: 2
@@ -107,7 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2029603016695656400, guid: 93085ddeebf90044bae7f53e038d96f2, type: 3}
+  m_Sprite: {fileID: -1197216642424367190, guid: cf96bbeab0e962b4798a58d9771b96a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,14 +136,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.26666668, y: 1.6}
+    oldSize: {x: 0.5, y: 3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.26666668, y: 1.6}
+  m_Size: {x: 0.6775513, y: 3.055472}
   m_EdgeRadius: 0
 --- !u!114 &2082527334139540700
 MonoBehaviour:
@@ -156,6 +157,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80446852ea1d5104cb65454849609129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8239575295536354218
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6123297253755013572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d761fa97ff6df943b0370462f506672, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6469542075539921331
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,6 +271,7 @@ GameObject:
   - component: {fileID: 6469542075814639707}
   - component: {fileID: 7813926240032125023}
   - component: {fileID: 239219071518469582}
+  - component: {fileID: 1327038170228804268}
   m_Layer: 0
   m_Name: Door Triger Left
   m_TagString: Door
@@ -267,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 6469542075814639708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 13.137, y: 1.1661518, z: 174.92789}
-  m_LocalScale: {x: 1.918317, y: 1.9124788, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4679493154668079887}
   m_RootOrder: 1
@@ -313,7 +334,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2029603016695656400, guid: 93085ddeebf90044bae7f53e038d96f2, type: 3}
+  m_Sprite: {fileID: -1197216642424367190, guid: cf96bbeab0e962b4798a58d9771b96a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -337,18 +358,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.025360107, y: -0.00074994564}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.26666668, y: 1.6}
+    oldSize: {x: 0.5, y: 3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.26666668, y: 1.6}
+  m_Size: {x: 0.67755127, y: 3.0554721}
   m_EdgeRadius: 0
 --- !u!114 &239219071518469582
 MonoBehaviour:
@@ -362,3 +383,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80446852ea1d5104cb65454849609129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1327038170228804268
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6469542075814639708}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d761fa97ff6df943b0370462f506672, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
