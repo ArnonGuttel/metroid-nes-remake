@@ -29,15 +29,19 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public bool GameWon;
     private bool _canRoll;
     private int _playerEnergy = InitialEnergy;
-    private float invulnerableCounter; 
-
+    private float invulnerableCounter;
+    private PlayerAudioManager _audioManager;
 
     #endregion
     
 
 
     #region MonoBehaviour
-    
+
+    private void Start()
+    {
+        _audioManager = gameObject.GetComponent<PlayerAudioManager>();
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -93,10 +97,11 @@ public class PlayerManager : MonoBehaviour
         {
             _playerEnergy = 0;
             gameObject.GetComponent<Animator>().SetTrigger("PlayerDead");
+            _audioManager.playPlayerDead();
             GetComponent<PlayerMovement>().PlayerDead = true;
             gameOverUI.SetActive(true);
-            
         }
+        _audioManager.playPlayerHit();
         energyFrame.text = _playerEnergy.ToString();
         
         var player = GetComponent<PlayerMovement>();

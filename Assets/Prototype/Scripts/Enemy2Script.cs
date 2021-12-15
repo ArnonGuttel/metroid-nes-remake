@@ -38,6 +38,7 @@ public class Enemy2Script : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
+            gameObject.GetComponent<AudioSource>().Play(0);
             hitsCounter++;
             if (hitsCounter == hitsTillDestroy)
             {

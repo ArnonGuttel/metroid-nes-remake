@@ -20,6 +20,7 @@ public class Enemy1Script : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
+            gameObject.GetComponent<AudioSource>().Play(0);
             hitCounter++;
             if (hitCounter == hitsTillDestroy)
             {
@@ -29,6 +30,7 @@ public class Enemy1Script : MonoBehaviour
                 }
                 gameObject.GetComponent<Animator>().SetTrigger("EnemyDead");
                 Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                gameObject.GetComponent<Collider2D>().enabled = false;
             }
             gameObject.GetComponent<Animator>().SetTrigger("EnemyHit");
             

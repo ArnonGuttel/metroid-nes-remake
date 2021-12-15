@@ -17,7 +17,9 @@ public class EnergyBallScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerManager>().addEnergy();
-            Destroy(gameObject);
+            gameObject.GetComponent<AudioSource>().Play(0);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(gameObject,gameObject.GetComponent<AudioSource>().clip.length/3f);
         }
     }
 }

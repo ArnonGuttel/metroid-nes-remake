@@ -22,7 +22,14 @@ public class PlayerMovement : MonoBehaviour
     public float knockBack;
     public bool rollPowerUp;
     private bool _isRolling;
+    private PlayerAudioManager _audioManager;
 
+    
+    private void Start()
+    {
+        _audioManager = gameObject.GetComponent<PlayerAudioManager>();
+    }
+    
     void Update()
     {
         if (PlayerDead)
@@ -37,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && onGround) // long jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+                _audioManager.playJump();
                 _isRolling = false;
             }
             else if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0.0f) // short jump
