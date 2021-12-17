@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class CameraFollows : MonoBehaviour
@@ -21,10 +18,14 @@ public class CameraFollows : MonoBehaviour
             if (_prevBoundary)
                 GameManager.boundrayChange();
             if (_target != transform.position)
+            {
                 Player.GetComponent<PlayerMovement>().LockMovement = true;
+                Player.GetComponent<PlayerFireScript>().canFire = false;
+            }
             else
             {
                 Player.GetComponent<PlayerMovement>().LockMovement = false;
+                Player.GetComponent<PlayerFireScript>().canFire = true;
                 _prevBoundary = boundary;
             }
         }

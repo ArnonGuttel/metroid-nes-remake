@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -18,15 +15,12 @@ public class PlayerManager : MonoBehaviour
     #region Inspector
 
     [SerializeField] private  TextMeshProUGUI energyFrame;
-    [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private GameObject gameWonUI;
     [SerializeField] float invulnerableLength;
 
     #endregion
 
     #region Fields
-
-    [HideInInspector] public bool GameWon;
+    
     private bool _canRoll;
     private int _playerEnergy = InitialEnergy;
     private float invulnerableCounter;
@@ -41,6 +35,18 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         _audioManager = gameObject.GetComponent<PlayerAudioManager>();
+    }
+
+    private void Awake()
+    {
+        GameManager.PlayerDead += playerDead;
+        GameManager.GameWon += HidePlayer;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.PlayerDead -= playerDead;
+        GameManager.GameWon -= HidePlayer;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -78,12 +84,6 @@ public class PlayerManager : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
 
-        if (GameWon)
-        {
-            GetComponent<PlayerMovement>().PlayerDead = true;
-            gameWonUI.gameObject.SetActive(true);
-        }
-                
     }
     #endregion
     
@@ -94,13 +94,7 @@ public class PlayerManager : MonoBehaviour
         gameObject.GetComponent<Animator>().SetTrigger("PlayerHit");
         _playerEnergy -= HitDamage;
         if (_playerEnergy <= 0)
-        {
-            _playerEnergy = 0;
-            gameObject.GetComponent<Animator>().SetTrigger("PlayerDead");
-            _audioManager.playPlayerDead();
-            GetComponent<PlayerMovement>().PlayerDead = true;
-            gameOverUI.SetActive(true);
-        }
+            GameManager.InvokePlayerDead();
         _audioManager.playPlayerHit();
         energyFrame.text = _playerEnergy.ToString();
         
@@ -119,6 +113,20 @@ public class PlayerManager : MonoBehaviour
         _playerEnergy += EnergyRestore;
         energyFrame.text = _playerEnergy.ToString();
     }
+
+    private void playerDead()
+    {
+        _playerEnergy = 0;
+        gameObject.GetComponent<Animator>().SetTrigger("PlayerDead");
+        _audioManager.playPlayerDead();
+        GetComponent<PlayerMovement>().PlayerDead = true;
+    }
+
+    private void HidePlayer()
+    {
+        gameObject.SetActive(false);
+    }
+    
     
     #endregion
 }
