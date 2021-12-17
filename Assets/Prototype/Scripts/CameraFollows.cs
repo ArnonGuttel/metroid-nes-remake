@@ -6,35 +6,28 @@ using UnityEngine;
 
 public class CameraFollows : MonoBehaviour
 {
-    private BoxCollider2D cameraBox;
+
     public Transform Player;
     [SerializeField] private float cameraSpeed;
-    // [SerializeField] private bool lockX;
-    // [SerializeField] private bool lockY;
-    
     private Vector3 _target;
-    private void Start()
-    {
-        cameraBox = GetComponent<BoxCollider2D>();
-    }
-    
+    private GameObject _prevBoundary;
+
     void Update()
     {
         GameObject boundary = GameObject.Find("Boundary");
-        // Vector3 prevPosition = transform.position;
         followPlayer(boundary);
-        
-        // Vector3 temp = transform.position;
-        // if (boundary.gameObject.GetComponentInParent<BoundaryManager>().cameraLockX)
-        // {
-        //     temp.x = prevPosition.x;
-        // }
-        // if (boundary.gameObject.GetComponentInParent<BoundaryManager>().cameraLockY)
-        // {
-        //     temp.y = prevPosition.y;
-        // }
-        //
-        // transform.position = temp;
+        if (boundary != _prevBoundary)
+        {   
+            if (_prevBoundary)
+                GameManager.boundrayChange();
+            if (_target != transform.position)
+                Player.GetComponent<PlayerMovement>().LockMovement = true;
+            else
+            {
+                Player.GetComponent<PlayerMovement>().LockMovement = false;
+                _prevBoundary = boundary;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -63,13 +56,9 @@ public class CameraFollows : MonoBehaviour
                 _target.y = Mathf.Clamp(playerPosition.y, script.XMinValue, playerPosition.y);
             
             _target.z = -10;
-            
-            // BoxCollider2D boundaryCollider = boundary.GetComponent<BoxCollider2D>();
-            // _target = new Vector3(
-            //     Mathf.Clamp(Player.position.x, boundaryCollider.bounds.min.x + cameraBox.size.x/2, boundaryCollider.bounds.max.x - cameraBox.size.x/2),
-            //     Mathf.Clamp(Player.position.y-2, boundaryCollider.bounds.min.y + cameraBox.size.y/2, boundaryCollider.bounds.max.y - cameraBox.size.y/2),
-            //     -10);
+
             
         }
     }
+    
 }

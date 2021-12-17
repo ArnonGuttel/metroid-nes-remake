@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float jumpHeight = 15f;
     [SerializeField] private float ShortJumpDecrease = 5.0f;
+    [HideInInspector] public bool LockMovement;
     [HideInInspector] public float knockBackCount;
     [HideInInspector] public bool knockFromRight;
     [HideInInspector] public bool onGround;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float knockBack;
     public bool rollPowerUp;
     private bool _isRolling;
+    [SerializeField] private LayerMask mask;
     private PlayerAudioManager _audioManager;
 
     
@@ -32,20 +34,31 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        if (PlayerDead)
+        if (PlayerDead || LockMovement)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            if (LockMovement)
+                Animator.SetBool("IsWalking",false);
             return;
+        }
+
         
         if (knockBackCount <= 0)
         {
             float dirx = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(dirx * moveSpeed, rb.velocity.y);
-            if (Input.GetKey(KeyCode.UpArrow))
-                _isRolling = false;
+            if (Input.GetKey(KeyCode.UpArrow) && _isRolling)
+                stopRoll();
             if (Input.GetKeyDown(KeyCode.Space) && onGround) // long jump
             {
+                if (_isRolling)
+                {
+                    stopRoll();
+                    return;
+                }
                 rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
                 _audioManager.playJump();
-                _isRolling = false;
+
             }
             else if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0.0f) // short jump
                 rb.velocity = new Vector2(rb.velocity.x,math.max(rb.velocity.y - ShortJumpDecrease,0));
@@ -57,9 +70,20 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             if (knockFromRight)
-                rb.velocity = new Vector2(-knockBack, knockBack);
+            {
+                if (_isRolling)
+                    rb.velocity = new Vector2(-knockBack, 0);
+                else 
+                    rb.velocity = new Vector2(-knockBack, knockBack);
+            }
+
             if (!knockFromRight)
-                rb.velocity = new Vector2(knockBack, knockBack);
+            {
+                if (_isRolling)
+                    rb.velocity = new Vector2(knockBack, 0);
+                else 
+                    rb.velocity = new Vector2(knockBack, knockBack);
+            }
             knockBackCount -= Time.deltaTime;
         }
 
@@ -78,18 +102,6 @@ public class PlayerMovement : MonoBehaviour
         Animator.SetBool("IsJumping",  !onGround);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Platform"))
-            onGround = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Platform"))
-            onGround = false;
-    }
-    
     private void startRoll()
     {
         if (!_isRolling)
@@ -98,5 +110,12 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<PlayerFireScript>().canFire = false;
             Animator.SetBool("IsRolling",true);
         }
+    }
+
+    private void stopRoll()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up,1f,mask.value);
+        if (hit.collider == null)
+            _isRolling = false;
     }
 }

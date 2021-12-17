@@ -9,6 +9,7 @@ public class GameWonBall : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerManager>().GameWon = true;
+            other.gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

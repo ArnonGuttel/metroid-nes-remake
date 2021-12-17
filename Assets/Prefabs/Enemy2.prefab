@@ -188,9 +188,10 @@ MonoBehaviour:
   enemyBullet: {fileID: 7323704332384061446, guid: 54f2e7d264269ce4da4f2dfab255f6da, type: 3}
   EnregyBall: {fileID: 6907323533845595635, guid: ac34e293093685a4fbd43111ea298b14, type: 3}
   hitsTillDestroy: 3
-  speed: 6
+  speed: 8
   delay: 1
-  bulletSpeed: 9
+  bulletSpeed: 11
+  bulletTime: 0.5
   bulletDirections:
   - {x: 1, y: 0}
   - {x: -1, y: 0}

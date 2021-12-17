@@ -10,7 +10,11 @@ public class WaypointFollower : MonoBehaviour
 
     private int waypointsArrayIndex = 0;
     public float delayCounter;
-    
+
+    private void OnEnable()
+    {
+        waypointsArrayIndex = 0;
+    }
 
     private void Update()
     {

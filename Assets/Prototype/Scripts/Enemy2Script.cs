@@ -13,9 +13,10 @@ public class Enemy2Script : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject EnregyBall;
     [SerializeField] private int hitsTillDestroy;
-    [SerializeField]  private float speed = 1; 
-    [SerializeField] private float delay = 1.5f;
-    [SerializeField] private float bulletSpeed = 1.5f;
+    [SerializeField]  private float speed; 
+    [SerializeField] private float delay;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletTime;
     [SerializeField] private Vector2[] bulletDirections;
     [SerializeField] private float dropRate;
     [SerializeField] private float hitDelay;
@@ -26,6 +27,7 @@ public class Enemy2Script : MonoBehaviour
     
     [HideInInspector] public Vector3 playerPosition;
     [HideInInspector] public bool attackPlayer;
+    private Vector3 _initPosition;
     private Vector2 playerTarget;
     private bool explode;
     private float timer;
@@ -34,6 +36,22 @@ public class Enemy2Script : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        _initPosition = gameObject.transform.position;
+    }
+    
+    private void OnEnable()
+    {
+        transform.position = _initPosition;
+        explode = false;
+        attackPlayer = false;
+        hitsCounter = 0;
+        delayCounter = 0;
+        timer = 0;
+        gameObject.GetComponent<Collider2D>().enabled = true;
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bullet"))
@@ -47,7 +65,8 @@ public class Enemy2Script : MonoBehaviour
                     Instantiate(EnregyBall, transform.position, transform.rotation);
                 }
                 gameObject.GetComponent<Animator>().SetTrigger("EnemyDead");
-                Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                gameObject.GetComponent<Collider2D>().enabled = false;
+                Invoke("deactiveEnemy",GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             }
             gameObject.GetComponent<Animator>().SetTrigger("EnemyHit");
             delayCounter = hitDelay;
@@ -60,7 +79,7 @@ public class Enemy2Script : MonoBehaviour
         if (other.gameObject.CompareTag("Platform")&& attackPlayer)
         {
             attackPlayer = false;
-            Destroy(gameObject.GetComponentInChildren<CircleCollider2D>());
+            gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
             explode = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
@@ -92,9 +111,9 @@ public class Enemy2Script : MonoBehaviour
                     bullet.transform.position = temp;
                     Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
                     bulletRb.velocity = bulletDirections[i] * bulletSpeed;
-                    Destroy(bullet, 1.5f);
+                    Destroy(bullet, bulletTime);
                 }
-                Destroy(gameObject);
+                deactiveEnemy();
             }
             else
             {
@@ -102,4 +121,10 @@ public class Enemy2Script : MonoBehaviour
             }
         }
     }
+    private void deactiveEnemy()
+    {
+        GameManager.addToDeadEnemies(gameObject);
+        gameObject.SetActive(false);
+    }
+    
 }

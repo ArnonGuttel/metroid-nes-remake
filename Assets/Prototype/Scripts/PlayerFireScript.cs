@@ -42,13 +42,16 @@ public class PlayerFireScript : MonoBehaviour
             currentDirection = Vector2.left;
         }
         
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            if (currentDirection == Vector2.right)
-                Gun.transform.localPosition = new Vector3(0.1f, 0.5f, 0);
-            else if (currentDirection == Vector2.left)
-                Gun.transform.localPosition = new Vector3(-0.1f, 0.5f, 0);
-            currentDirection = Vector2.up;
+            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            {
+                if (currentDirection == Vector2.right)
+                    Gun.transform.localPosition = new Vector3(0.1f, 0.5f, 0);
+                else if (currentDirection == Vector2.left)
+                    Gun.transform.localPosition = new Vector3(-0.1f, 0.5f, 0);
+                currentDirection = Vector2.up;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -63,7 +66,7 @@ public class PlayerFireScript : MonoBehaviour
             gameObject.GetComponent<Animator>().SetTrigger("Fire");
         }
 
-        if (currentDirection == Vector2.up)
+        if (currentDirection == Vector2.up && !Input.GetKeyDown(KeyCode.LeftArrow) && !Input.GetKeyDown(KeyCode.RightArrow))
         {
             gameObject.GetComponent<Animator>().SetBool("IsGunUp", true);
             
