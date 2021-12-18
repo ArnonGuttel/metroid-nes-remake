@@ -6,7 +6,7 @@ public class CameraFollows : MonoBehaviour
 
     [SerializeField] private float cameraSpeed;
     [SerializeField] private Transform Player;
-    
+
     #endregion
 
     #region Fields
@@ -18,31 +18,29 @@ public class CameraFollows : MonoBehaviour
 
     #region MonoBehaviour
 
-    void Update()
+    private void FixedUpdate()
+        // We will use the FollowPlayer method to set the camera target location.
+        // also we will check whether the boundary has changed, if so we will use the CameraBoundaryChange method.
     {
         GameObject boundary = GameObject.Find("Boundary");
         followPlayer(boundary);
+        transform.position = Vector3.MoveTowards(transform.position, _target, cameraSpeed * Time.deltaTime);
         if (boundary != _prevBoundary)
             CameraBoundaryChange(boundary);
     }
 
-    private void FixedUpdate()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, _target, cameraSpeed * Time.deltaTime);
-    }
-
     #endregion
-
-
+    
     #region Methods
 
     private void followPlayer(GameObject boundary)
+        // This method will set the camera target location by clamping it with the boundary script settings.
     {
         if (boundary)
         {
             Vector3 playerPosition = Player.transform.position;
             BoundaryManager script = boundary.GetComponentInParent<BoundaryManager>();
-            
+
             if (script.XMaxEnabled && script.XMinEnabled)
                 _target.x = Mathf.Clamp(playerPosition.x, script.XMinValue, script.XMaxValue);
             else if (script.XMaxEnabled)
@@ -62,6 +60,7 @@ public class CameraFollows : MonoBehaviour
     }
 
     private void CameraBoundaryChange(GameObject boundary)
+        // If the boundary has changed , We will freeze the player movement until the camera has reached to it new position.
     {
         if (_prevBoundary)
             GameManager.boundrayChange();

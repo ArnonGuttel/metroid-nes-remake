@@ -1,19 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaypointFollower : MonoBehaviour
 {
+    #region Inspector
+
     [SerializeField] private GameObject[] waypoints;
     [SerializeField] private float speed;
-
-    private int waypointsArrayIndex = 0;
     public float delayCounter;
+
+    #endregion
+
+    #region Fields
+
+    private int _waypointsArrayIndex;
+
+    #endregion
+
+    #region MonoBehaviour
 
     private void OnEnable()
     {
-        waypointsArrayIndex = 0;
+        _waypointsArrayIndex = 0;
     }
 
     private void Update()
@@ -27,13 +34,20 @@ public class WaypointFollower : MonoBehaviour
         if (waypoints.Length == 0)
             return;
         
-        if (transform.position == waypoints[waypointsArrayIndex].transform.position)
+        if (transform.position == waypoints[_waypointsArrayIndex].transform.position)
         {
-            waypointsArrayIndex++;
-            if (waypointsArrayIndex == waypoints.Length)
-                waypointsArrayIndex = 0;
+            _waypointsArrayIndex++;
+            if (_waypointsArrayIndex == waypoints.Length)
+                _waypointsArrayIndex = 0;
         }
         transform.position = Vector2.MoveTowards(transform.position,
-            waypoints[waypointsArrayIndex].transform.position, speed * Time.deltaTime);
+            waypoints[_waypointsArrayIndex].transform.position, speed * Time.deltaTime);
     }
+
+    #endregion
+
+
+
+
+
 }

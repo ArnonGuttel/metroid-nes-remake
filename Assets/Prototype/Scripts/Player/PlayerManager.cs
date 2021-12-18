@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 
@@ -11,16 +10,16 @@ public class PlayerManager : MonoBehaviour
     private const int InitialEnergy = 30;
 
     #endregion
-    
+
     #region Inspector
 
-    [SerializeField] private  TextMeshProUGUI energyFrame;
+    [SerializeField] private TextMeshProUGUI energyFrame;
     [SerializeField] float invulnerableLength;
 
     #endregion
 
     #region Fields
-    
+
     private bool _canRoll;
     private int _playerEnergy = InitialEnergy;
     private float invulnerableCounter;
@@ -28,8 +27,6 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
     
-
-
     #region MonoBehaviour
 
     private void Start()
@@ -57,9 +54,9 @@ public class PlayerManager : MonoBehaviour
             {
                 return;
             }
+
             enemyHit(other.gameObject);
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,14 +76,15 @@ public class PlayerManager : MonoBehaviour
             invulnerableCounter -= Time.deltaTime;
             gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
+
         if (invulnerableCounter <= 0)
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
-
     }
+
     #endregion
-    
+
     #region Methods
 
     private void enemyHit(GameObject other)
@@ -97,20 +95,22 @@ public class PlayerManager : MonoBehaviour
             GameManager.InvokePlayerDead();
         _audioManager.playPlayerHit();
         energyFrame.text = _playerEnergy.ToString();
-        
+
         var player = GetComponent<PlayerMovement>();
         if (other.transform.position.x > transform.position.x)
             player.knockFromRight = true;
         else
             player.knockFromRight = false;
         player.knockBackCount = player.knockBackLength;
-        
+
         invulnerableCounter = invulnerableLength;
     }
 
     public void addEnergy()
     {
         _playerEnergy += EnergyRestore;
+        if (_playerEnergy >= 100)
+            _playerEnergy = 100;
         energyFrame.text = _playerEnergy.ToString();
     }
 
@@ -119,14 +119,13 @@ public class PlayerManager : MonoBehaviour
         _playerEnergy = 0;
         gameObject.GetComponent<Animator>().SetTrigger("PlayerDead");
         _audioManager.playPlayerDead();
-        GetComponent<PlayerMovement>().PlayerDead = true;
+        Invoke("HidePlayer",1f);
     }
 
     private void HidePlayer()
     {
         gameObject.SetActive(false);
     }
-    
-    
+
     #endregion
 }

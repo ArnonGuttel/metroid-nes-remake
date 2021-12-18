@@ -1,21 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 
 public class Enemy1Script : MonoBehaviour
 {
+    #region Inspector
+    
     public GameObject EnregyBall;
-
-    [SerializeField] private float hitDelay;
+    [SerializeField] private float hitDelay; // for how long to freeze enemy movement after bullet hit
     [SerializeField] private int hitsTillDestroy;
-    [SerializeField] private float dropRate;
+    [SerializeField] private float dropRate; // drop rate for energy ball
+
+    #endregion
+
+    #region Fields
+
     private Vector3 _initPosition;
-    private float delayCounter;
-    private int hitCounter;
+    private int _hitCounter;
+
+    #endregion
+
+    #region MonoBehaviour
 
     private void Awake()
     {
@@ -25,7 +30,7 @@ public class Enemy1Script : MonoBehaviour
     private void OnEnable()
     {
         transform.position = _initPosition;
-        hitCounter = 0;
+        _hitCounter = 0;
         gameObject.GetComponent<Collider2D>().enabled = true;
     }
 
@@ -34,25 +39,40 @@ public class Enemy1Script : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             gameObject.GetComponent<AudioSource>().Play(0);
-            hitCounter++;
-            if (hitCounter == hitsTillDestroy)
-            {
-                if (Random.Range(0f, 1f) <= dropRate)
-                {
-                    Instantiate(EnregyBall, transform.position, transform.rotation);
-                }
-                gameObject.GetComponent<Animator>().SetTrigger("EnemyDead");
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                Invoke("deactiveEnemy",GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            }
+            _hitCounter++;
+            if (_hitCounter == hitsTillDestroy)
+                EnemyDead();
             gameObject.GetComponent<Animator>().SetTrigger("EnemyHit");
             GetComponent<WaypointFollower>().delayCounter = hitDelay;
         }
     }
+    
+    #endregion
 
-    private void deactiveEnemy()
+    #region Methods
+
+    private void EnemyDead()
+    // check for energy ball instantiation, play "EnemyDead" animation, and update GameManager DeadEnemies. 
+    {
+        if (Random.Range(0f, 1f) <= dropRate)
+        {
+            var transform1 = transform;
+            Instantiate(EnregyBall, transform1.position, transform1.rotation);
+        }
+        gameObject.GetComponent<Animator>().SetTrigger("EnemyDead");
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        Invoke(nameof(DeActiveEnemy),GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+    }
+    
+    private void DeActiveEnemy()
     {
         GameManager.addToDeadEnemies(gameObject);
         gameObject.SetActive(false);
     }
+
+    #endregion
+    
+
+
+
 }

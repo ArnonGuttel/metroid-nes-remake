@@ -2,9 +2,20 @@ using UnityEngine;
 
 public class Enemy2Radius : MonoBehaviour
 {
+    #region Inspector
+
     public Enemy2Script script;
+
+    #endregion
+
+    #region Fields
+
     private float _circleRaduis;
     private CircleCollider2D _circleCollider2D;
+
+    #endregion
+
+    #region MonoBehaviour
 
     private void Awake()
     {
@@ -29,14 +40,17 @@ public class Enemy2Radius : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other)
+        // reduce radius size
+    {
+        if (script.attackPlayer)
         {
-            if (script.attackPlayer)
+            if (other.gameObject.CompareTag("Player"))
             {
-                if (other.gameObject.CompareTag("Player"))
-                {
-                    script.playerPosition = other.gameObject.transform.position;
-                    _circleCollider2D.radius -= 0.1f * Time.deltaTime;
-                }
+                script.playerPosition = other.gameObject.transform.position;
+                _circleCollider2D.radius -= 0.1f * Time.deltaTime;
             }
         }
+    }
+
+    #endregion
 }

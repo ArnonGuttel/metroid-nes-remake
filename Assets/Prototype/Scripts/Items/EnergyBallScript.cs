@@ -1,12 +1,12 @@
-
 using UnityEngine;
 
 public class EnergyBallScript : MonoBehaviour
 {
     [SerializeField] private float EnergyBallTimer;
+
     private void Start()
     {
-        Destroy(gameObject,EnergyBallTimer);
+        Destroy(gameObject, EnergyBallTimer);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +16,7 @@ public class EnergyBallScript : MonoBehaviour
             other.gameObject.GetComponent<PlayerManager>().addEnergy();
             gameObject.GetComponent<AudioSource>().Play(0);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject,gameObject.GetComponent<AudioSource>().clip.length/3f);
+            Destroy(gameObject, gameObject.GetComponent<AudioSource>().clip.length / 3f);
         }
     }
 }

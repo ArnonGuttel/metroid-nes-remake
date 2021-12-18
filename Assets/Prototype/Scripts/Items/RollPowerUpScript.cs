@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RollPowerUpScript : MonoBehaviour
@@ -12,8 +9,7 @@ public class RollPowerUpScript : MonoBehaviour
             other.gameObject.GetComponent<PlayerMovement>().rollPowerUp = true;
             gameObject.GetComponent<AudioSource>().Play(0);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject,gameObject.GetComponent<AudioSource>().clip.length/2f);
+            Destroy(gameObject, gameObject.GetComponent<AudioSource>().clip.length / 2f);
         }
-
     }
 }

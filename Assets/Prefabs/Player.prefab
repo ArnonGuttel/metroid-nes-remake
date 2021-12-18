@@ -108,10 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyFrame: {fileID: 0}
-  gameOverUI: {fileID: 0}
-  gameWonUI: {fileID: 0}
   invulnerableLength: 1
-  GameWon: 0
 --- !u!114 &2135314835633390000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +126,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpHeight: 16
   ShortJumpDecrease: 7
+  LockMovement: 0
   knockBackCount: 0
   knockFromRight: 0
   onGround: 0
@@ -136,6 +134,9 @@ MonoBehaviour:
   knockBackLength: 0.1
   knockBack: 3
   rollPowerUp: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3983667875885714855
 MonoBehaviour:
   m_ObjectHideFlags: 0

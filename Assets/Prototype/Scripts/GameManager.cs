@@ -7,31 +7,123 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _shared;
-    private bool _resetFlag;
-    [SerializeField] private  TextMeshProUGUI TimerFrame;
+    #region Inspector
+
+    [SerializeField] private TextMeshProUGUI TimerFrame;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject gameWonUI;
-
-    public List<GameObject> DeadEnemies;
+    [SerializeField] private GameObject gamePausedUI;
     [SerializeField] private float Timer;
+
+    #endregion
+
+    #region Fields
+
+    private static GameManager _shared;
+    [HideInInspector] public List<GameObject> DeadEnemies;
+    private bool _resetFlag;
     private bool _startTimer;
+    private bool _isPaused;
+
+    #endregion
+
+    #region Events
 
     public static event Action OpenHiddenDoor;
     public static event Action PlayerDead;
     public static event Action GameWon;
+
+    public static void KeyTaken()
+    {
+        OpenHiddenDoor?.Invoke();
+    }
+
+    public static void InvokePlayerDead()
+    {
+        PlayerDead?.Invoke();
+    }
+
+    public static void InvokeGameWon()
+    {
+        GameWon?.Invoke();
+    }
+
+    private void hideTimer()
+    {
+        _startTimer = false;
+        TimerFrame.gameObject.SetActive(false);
+    }
+
+    private void activeGameWonUI()
+    {
+        gameWonUI.SetActive(true);
+        GetComponent<AudioSource>().Stop();
+    }
+
+    private void activeGameOverUI()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    private void startTimer()
+    {
+        TimerFrame.gameObject.SetActive(true);
+        _startTimer = true;
+    }
+
+    #endregion
+
+    #region MonoBehaviour
 
     private void Start()
     {
         _shared = this;
     }
 
+    private void Awake()
+    {
+        OpenHiddenDoor += startTimer;
+        PlayerDead += activeGameOverUI;
+        GameWon += hideTimer;
+        GameWon += activeGameWonUI;
+    }
+
+    private void OnDestroy()
+    {
+        OpenHiddenDoor -= startTimer;
+        PlayerDead -= activeGameOverUI;
+        GameWon -= hideTimer;
+        GameWon -= activeGameWonUI;
+    }
+
+    private void Update()
+    {
+        if (_startTimer)
+            runTimer();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameOverUI.gameObject.activeInHierarchy || gameWonUI.gameObject.activeInHierarchy)
+                return;
+            if (_isPaused)
+                resumeGame();
+            else
+                pauseGame();
+        }
+    }
+
+    #endregion
+
+    #region StaticMethods
+
     public static void addToDeadEnemies(GameObject enemy)
+        // whenever an Enemy die it will be added to the deadEnemies list 
     {
         _shared.DeadEnemies.Add(enemy);
     }
 
     public static void resetEnemies()
+        // Once the player will reach to a respawn point we will reActive every dead enemy.
+        // We will set the respawns limit to every boundary change. 
     {
         if (_shared.DeadEnemies.Count == 0 || _shared._resetFlag == false)
             return;
@@ -49,86 +141,46 @@ public class GameManager : MonoBehaviour
         _shared._resetFlag = true;
     }
 
+    #endregion
+
+    #region Methods
+
     public void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
-    
+
     public void playAgain()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Metroid Prototype");
     }
 
-    public static void KeyTaken()
+    public void resumeGame()
     {
-        OpenHiddenDoor?.Invoke();
+        gamePausedUI.SetActive(false);
+        Time.timeScale = 1;
+        _isPaused = false;
     }
 
-    public static void InvokePlayerDead()
+    private void pauseGame()
     {
-        PlayerDead?.Invoke();
+        gamePausedUI.SetActive(true);
+        Time.timeScale = 0;
+        _isPaused = true;
     }
 
-    public static void InvokeGameWon()
+    private void runTimer()
     {
-        GameWon?.Invoke();
-    }
-
-    private void startTimer()
-    {
-        TimerFrame.gameObject.SetActive(true);
-        _startTimer = true;
-    }
-
-
-    private void Awake()
-    {
-        OpenHiddenDoor += startTimer;
-        PlayerDead += activeGameOverUI;
-        GameWon += hideTimer;
-        GameWon += activeGameWonUI;
-
-    }
-
-    private void OnDestroy()
-    {
-        OpenHiddenDoor -= startTimer;
-        PlayerDead -= activeGameOverUI;
-        GameWon -= hideTimer;
-        GameWon -= activeGameWonUI;
-    }
-
-    private void hideTimer()
-    {
-        _startTimer = false;
-        TimerFrame.gameObject.SetActive(false);
-    }
-
-    private void activeGameWonUI()
-    {
-        gameWonUI.SetActive(true);
-        GetComponent<AudioSource>().Stop();
-    }
-    
-    private void activeGameOverUI()
-    {
-        gameOverUI.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if (_startTimer)
+        Timer = Timer - Time.deltaTime;
+        double timeLeft = Math.Round(Timer, 2);
+        TimerFrame.text = timeLeft.ToString();
+        if (Timer <= 0)
         {
-            Timer = Timer-Time.deltaTime;
-            double timeLeft = Math.Round(Timer, 2);
-            TimerFrame.text = timeLeft.ToString();
-            if (Timer <= 0)
-            {
-                TimerFrame.text = "0";
-                _startTimer = false;
-                InvokePlayerDead();
-            }
+            TimerFrame.text = "0";
+            _startTimer = false;
+            InvokePlayerDead();
         }
-
     }
+
+    #endregion
 }

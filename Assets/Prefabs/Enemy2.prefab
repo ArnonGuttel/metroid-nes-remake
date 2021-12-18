@@ -184,14 +184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44405529d88fcd1498da4004b54ec8f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sp: {fileID: 5838080361436079574}
   enemyBullet: {fileID: 7323704332384061446, guid: 54f2e7d264269ce4da4f2dfab255f6da, type: 3}
-  EnregyBall: {fileID: 6907323533845595635, guid: ac34e293093685a4fbd43111ea298b14, type: 3}
+  enregyBall: {fileID: 6907323533845595635, guid: ac34e293093685a4fbd43111ea298b14, type: 3}
   hitsTillDestroy: 3
-  speed: 8
-  delay: 1
+  enemySpeed: 8
+  timeTillExplosion: 1
   bulletSpeed: 11
   bulletTime: 0.5
+  bulletsNumber: 4
   bulletDirections:
   - {x: 1, y: 0}
   - {x: -1, y: 0}
