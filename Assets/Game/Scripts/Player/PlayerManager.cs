@@ -4,17 +4,17 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     #region Constants
-
-    private const int HitDamage = 8;
-    private const int EnergyRestore = 5;
+    
     private const int InitialEnergy = 30;
 
     #endregion
 
     #region Inspector
 
+    [SerializeField] private int playerHitDamage;
+    [SerializeField] private int energyRestore;
     [SerializeField] private TextMeshProUGUI energyFrame;
-    [SerializeField] float invulnerableLength;
+    [SerializeField] private  float invulnerableLength;
 
     #endregion
 
@@ -90,7 +90,7 @@ public class PlayerManager : MonoBehaviour
     private void enemyHit(GameObject other)
     {
         gameObject.GetComponent<Animator>().SetTrigger("PlayerHit");
-        _playerEnergy -= HitDamage;
+        _playerEnergy -= playerHitDamage;
         if (_playerEnergy <= 0)
             GameManager.InvokePlayerDead();
         _audioManager.playPlayerHit();
@@ -108,9 +108,9 @@ public class PlayerManager : MonoBehaviour
 
     public void addEnergy()
     {
-        _playerEnergy += EnergyRestore;
-        if (_playerEnergy >= 100)
-            _playerEnergy = 100;
+        _playerEnergy += energyRestore;
+        if (_playerEnergy >= 99)
+            _playerEnergy = 99;
         energyFrame.text = _playerEnergy.ToString();
     }
 

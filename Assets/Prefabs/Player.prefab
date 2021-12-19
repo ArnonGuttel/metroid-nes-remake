@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70abe82e0391fc945adea23722129393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHitDamage: 8
+  energyRestore: 5
   energyFrame: {fileID: 0}
   invulnerableLength: 1
 --- !u!114 &2135314835633390000

@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void playAgain()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Metroid Prototype");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Metroid Game");
     }
 
     public void resumeGame()

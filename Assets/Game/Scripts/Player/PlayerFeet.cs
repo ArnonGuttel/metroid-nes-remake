@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class PlayerFeet : MonoBehaviour
 {
+    #region Fields
+
     private PlayerMovement _playerMovement;
+
+    #endregion
+
+    #region MonoBehaviour
+
     private void Start()
     {
         _playerMovement = GetComponentInParent<PlayerMovement>();
@@ -25,4 +32,6 @@ public class PlayerFeet : MonoBehaviour
         if (other.gameObject.CompareTag("Platform"))
             _playerMovement.onGround = false;
     }
+
+    #endregion
 }

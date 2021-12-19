@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAudioManager : MonoBehaviour
 {
+    #region Inspector
+
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource playerHitSound;
     [SerializeField] private AudioSource playerDeadSound;
 
+    #endregion
 
     public void playJump()
     {
