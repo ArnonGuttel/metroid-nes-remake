@@ -46,18 +46,17 @@ I personally choose Metroid as i truly belive that this game had a major influen
 
   <h3>Gameplay:</h3>
 <p align="center">
-  <img src="Images/Gameplay1.jpeg" width="500"/>
-  <img src="Images/Gameplay2.jpeg" width="500"/>
-  <img src="Images/Gameplay3.jpeg" width="500"/>
-  <img src="Images/Gameplay4.jpeg" width="500"/>
-  <img src="Images/Gameplay5.jpeg" width="500"/>
-  <img src="Images/Gameplay6.jpeg" width="500"/>  
+  <img src="Images/Gameplay1.jpeg" width="400"/>
+  <img src="Images/Gameplay3.jpeg" width="400"/>
+  <img src="Images/Gameplay4.jpeg" width="400"/>
+  <img src="Images/Gameplay5.jpeg" width="400"/>
+
 
   <h3>Pause Menu:</h3>
-  <img src="Images/PauseMenu.jpeg" width="500"/>
+  <img src="Images/PauseMenu.jpeg" width="400"/>
   
   <h3>Game over:</h3>
-  <img src="Images/GameOverMenu.jpeg" width="500"/>
+  <img src="Images/GameOverMenu.jpeg" width="400"/>
 </p>
 
 ## Credits 
