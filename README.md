@@ -30,7 +30,7 @@ I personally choose Metroid as i truly belive that this game had a major influen
 
 - Windows:      
   - &emsp; Download the [WindowsBuild](https://github.com/ArnonGuttel/MetroidRemake/tree/main/WindowsBuild) folder 
-  - &emsp; Run the Breakout.exe executable file.
+  - &emsp; Run the Metroid Game.exe executable file.
  
  - Mac
    - &emsp; Download the [MacBuild](https://github.com/ArnonGuttel/MetroidRemake/tree/main/MacBuild.app/Contents) folder 
