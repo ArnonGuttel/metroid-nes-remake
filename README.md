@@ -7,7 +7,7 @@
   </h1>
 <h3 align="center">  
   
-  An remake of Nintendo`s masterpice origin Metroid using Unity & C#
+  A remake of Nintendo`s masterpice origin Metroid using Unity & C#
   </h3>
   
 ## Table Of Content
