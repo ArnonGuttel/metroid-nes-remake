@@ -135,3 +135,5 @@ WHATSNEW*          text
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
+
+*.* linguist-language=c#
