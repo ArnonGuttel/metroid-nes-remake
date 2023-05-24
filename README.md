@@ -21,8 +21,8 @@
 ## General
 
 The game was created as part of "Game Development Foundations course" by [NotSlot](https://github.com/notslot) within my Computer Science B.Sc.  
-The original assignment was to recreate an 1980s video game.  
-I personally choose Metroid as i truly belive that this game had a major influence on video games devolopment.  
+The initial task was to replicate a video game from the 1980s. 
+I specifically selected Metroid because I firmly believe it had a significant impact on the development of video games. 
   
 **I strongly suggest to check the light mod that I created following this project - [MetroidLightMod](https://github.com/ArnonGuttel/MetroidLightMod)** 
 
